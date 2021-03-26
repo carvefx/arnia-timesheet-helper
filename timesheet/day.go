@@ -1,4 +1,4 @@
-package main
+package timesheet
 
 import "time"
 
@@ -6,28 +6,28 @@ const development = "Development"
 const publicHoliday = "Public Holiday"
 const leave = "Leave"
 
-type timesheetDay struct {
-	date      time.Time
-	projectID int
-	status    dayStatus
+type Day struct {
+	Date      time.Time
+	ProjectID int
+	Status    dayStatus
 }
 
 type dayStatus struct {
-	isWorked    bool
-	description string
+	IsWorked    bool
+	Description string
 }
 
 func newWorkDayStatus() *dayStatus {
 	return &dayStatus{
-		isWorked:    true,
-		description: development,
+		IsWorked:    true,
+		Description: development,
 	}
 
 }
 
 func newFreeDayStatus(kind string) *dayStatus {
 	return &dayStatus{
-		isWorked:    false,
-		description: kind,
+		IsWorked:    false,
+		Description: kind,
 	}
 }

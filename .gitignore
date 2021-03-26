@@ -14,3 +14,7 @@ timesheet-*
 
 # Dependency directories (remove the comment below to include it)
 # vendor/
+
+# keep storage folder but exclude contents
+!storage/
+storage/*.csv

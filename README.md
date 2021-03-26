@@ -2,8 +2,9 @@
 
 ### Quick usage
 
-1. Disclaimer: in order to fetch the public holidays, an API is in use, so a working Internet connection will be required to use this script.
-If curious, this was used `https://date.nager.at/api/v2/PublicHolidays/2021/RO`
+1. Disclaimer: 
+* in order to fetch the public holidays, an API is in use, so a working Internet connection will be required to use this script. If curious, this was used `https://date.nager.at/api/v2/PublicHolidays/2021/RO`
+* The script will default to the current year.
 
 2. Install golang https://golang.org/doc/install
 
@@ -11,7 +12,7 @@ If curious, this was used `https://date.nager.at/api/v2/PublicHolidays/2021/RO`
 cd arnia-timesheet-helper
 
 # replace with your Odoo project id
-go run *.go -p=000
+go run main.go -p=000
 ```
 
 ### Quick CLI flag outline

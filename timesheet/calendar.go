@@ -9,11 +9,12 @@ import (
 )
 
 type Config struct {
-	SelectedYear      int
-	SelectedMonth     int
-	SelectedProjectID int
-	LeaveDays         string
-	ArniaProjectID    int
+	SelectedYear        int
+	SelectedMonth       int
+	SelectedProjectID   int
+	LeaveDays           string
+	IgnorePublicHoliday bool
+	ArniaProjectID      int
 }
 
 type Calendar struct {
@@ -46,7 +47,7 @@ func (c *Calendar) BuildTimesheet(cfg Config) []Day {
 		"publicHolidays", fmt.Sprintf("%d", c.publicHoliday.GetDates()),
 		"weekendDays", fmt.Sprintf("%d", c.weekend.GetDates()))
 
-	return c.dailyCheck(ldom, currYear, currMonth, cfg.ArniaProjectID, cfg.SelectedProjectID)
+	return c.dailyCheck(ldom, currYear, currMonth, cfg.ArniaProjectID, cfg.SelectedProjectID, cfg.IgnorePublicHoliday)
 }
 
 func (c *Calendar) getLastDayOfMonth(year int, month int) int {
@@ -54,7 +55,7 @@ func (c *Calendar) getLastDayOfMonth(year int, month int) int {
 	return time.Date(year, time.Month(month+1), 0, 0, 0, 0, 0, time.Local).Day()
 }
 
-func (c *Calendar) dailyCheck(ldom int, currYear int, currMonth int, arniaProjectID int, projectID int) []Day {
+func (c *Calendar) dailyCheck(ldom int, currYear int, currMonth int, arniaProjectID int, projectID int, ignorePublicHoliday bool) []Day {
 	timesheetDays := make([]Day, 0)
 	for d := 1; d <= ldom; d++ {
 		currDate := time.Date(currYear, time.Month(currMonth), d, 0, 0, 0, 0, time.Local)
@@ -67,7 +68,7 @@ func (c *Calendar) dailyCheck(ldom int, currYear int, currMonth int, arniaProjec
 			continue
 		}
 
-		if c.publicHoliday.HasDate(d) {
+		if !ignorePublicHoliday && c.publicHoliday.HasDate(d) {
 			currTimeSheetDay.Status = *newFreeDayStatus(publicHoliday)
 			currTimeSheetDay.ProjectID = arniaProjectID
 			timesheetDays = append(timesheetDays, *currTimeSheetDay)

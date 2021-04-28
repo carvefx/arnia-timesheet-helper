@@ -9,11 +9,12 @@ import (
 )
 
 type Config struct {
-	SelectedYear      int
-	SelectedMonth     int
-	SelectedProjectID int
-	LeaveDays         string
-	ArniaProjectID    int
+	SelectedYear        int
+	SelectedMonth       int
+	SelectedProjectID   int
+	LeaveDays           string
+	IgnorePublicHoliday bool
+	ArniaProjectID      int
 }
 
 type Calendar struct {

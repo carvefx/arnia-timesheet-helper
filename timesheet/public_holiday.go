@@ -27,6 +27,11 @@ func (ph *PublicHoliday) Parse(cfg Config, ldom int) {
 	var filteredHolidays []int = make([]int, 0)
 	year := cfg.SelectedYear
 	month := cfg.SelectedMonth
+	ignore := cfg.IgnorePublicHoliday
+
+	if ignore {
+	    return
+	}
 
 	h := ph.api.Fetch(year)
 

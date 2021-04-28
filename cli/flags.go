@@ -10,6 +10,7 @@ import (
 
 const unspecifiedProjectID int = 000
 const arniaProjectID int = 40
+const ignorePublicHolidays bool = false
 
 func BuildConfigFromFlags() (*timesheet.Config, error) {
 
@@ -18,6 +19,7 @@ func BuildConfigFromFlags() (*timesheet.Config, error) {
 	lFlag := flag.String("l", "", "Comma-separated list of days where you took a Leave. e.g. 02,05,22")
 	pFlag := flag.Int("p", unspecifiedProjectID, "Your project ID")
 	mFlag := flag.Int("m", defaultMonth, "The month you want to generate the export against. Will default to the current month e.g. 06")
+	iFlag := flag.Bool("i", ignorePublicHolidays, "Ignore public holidays <boolean field>")
 
 	flag.Parse()
 
@@ -30,10 +32,11 @@ func BuildConfigFromFlags() (*timesheet.Config, error) {
 	}
 
 	return &timesheet.Config{
-		SelectedYear:      defaultYear,
-		SelectedMonth:     *mFlag,
-		SelectedProjectID: *pFlag,
-		LeaveDays:         *lFlag,
-		ArniaProjectID:    arniaProjectID,
+		SelectedYear:        defaultYear,
+		SelectedMonth:       *mFlag,
+		SelectedProjectID:   *pFlag,
+		LeaveDays:           *lFlag,
+		IgnorePublicHoliday: *iFlag,
+		ArniaProjectID:      arniaProjectID,
 	}, nil
 }

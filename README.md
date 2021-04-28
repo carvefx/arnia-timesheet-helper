@@ -25,6 +25,8 @@ go run main.go -p=000
 
 -m # allows you to generate a report for a custom month
 -m=02 # generate my report for February, current year
+
+-i # ignores public holidays
 ```
 
 ### Extras

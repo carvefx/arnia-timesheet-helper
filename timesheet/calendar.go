@@ -63,7 +63,7 @@ func (c *Calendar) dailyCheck(ldom int, currYear int, currMonth int, arniaProjec
 			Date: currDate,
 		}
 
-		if c.leave.HasDate(d) {
+		if c.weekend.HasDate(d) {
 			continue
 		}
 

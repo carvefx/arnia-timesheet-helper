@@ -18,7 +18,7 @@ type PublicHolidayAPI struct {
 
 func NewPublicHolidayAPI(logger log.Logger) *PublicHolidayAPI {
 	return &PublicHolidayAPI{
-		apiBaseURL: "https://date.nager.at/api/v2/PublicHolidays/",
+		apiBaseURL: "https://date.nager.at/api/v3/PublicHolidays/",
 		logger:     logger,
 	}
 }
